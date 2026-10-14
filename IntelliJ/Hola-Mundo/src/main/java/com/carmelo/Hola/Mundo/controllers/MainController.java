@@ -6,7 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
+
     @GetMapping("/")
+    public String menu(Model model){
+        model.addAttribute("Menu", "Menu");
+        return "menu";
+    }
+
+    @GetMapping("/index")
     public String saluda(Model model){
         model.addAttribute("Saludo", "Hola");
         return "index";
