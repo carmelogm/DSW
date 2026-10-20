@@ -5,9 +5,14 @@
     <title>Menu</title>
 </head>
 <body>
-    <h1>Saludo</h1>
-    <a th:href="@{/index}">Haz click aqui para ser saludado</a>
-    <h1>Despedida</h1>
-    <a th:href="@{/despedida}">Haz click aqui para ser despedido</a>
+    <nav th:fragment="cabeceraComun">
+        <h1>Menu</h1>
+        <h2>Saludo</h2>
+        <a th:href="@{/index}">Haz click aqui para ser saludado</a>
+        <h2>Despedida</h2>
+        <a th:href="@{/despedida}">Haz click aqui para ser despedido</a>
+        <h2>Felicitar</h2>
+        <a th:href="@{/felicita}">Haz click aqui para felicitar a alguien</a>
+    </nav>
 </body>
 </html>
