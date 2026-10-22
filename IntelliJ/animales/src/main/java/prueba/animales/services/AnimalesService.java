@@ -14,6 +14,15 @@ import java.util.List;
             animales.add(new Animales(2, "Tortuga", 100, false));
             animales.add(new Animales(3, "Lince", 15, false));
         }
-        public List<Animales> findAll() { return animales; }
-    }
 
+        public List<Animales> findAll() { return animales; }
+
+    public Animales findById(int id) {
+        for (Animales a : animales) {
+            if (a.getId() == id) {
+                return a;
+            }
+        }
+        return null;
+    }
+    }

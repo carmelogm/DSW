@@ -7,7 +7,7 @@
     <title>Listar animales</title>
 </head>
 <body>
-<table>
+<table border="1">
     <thead>
         <tr><th> Nombre </th><th> Vida </th><th> Extinto </th></tr>
     </thead>
@@ -16,8 +16,8 @@
         <td th:text="${a.nombre}"></td>
         <td th:text="${a.vidaMedia}"></td>
         <td th:text="${a.extinto ? 'Sí' : 'No'}"></td>
+        <a th:href="@{/animales/detalles/{id}(id=${a.id})}">Detalles</a>
     </tr>
     </tbody>
 </table>
 </body>
-</html>
