@@ -4,20 +4,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
-    <title>Listar animales</title>
+    <title>Detalles del animal</title>
 </head>
 <body>
-<table border="1">
-    <thead>
-        <tr><th> Nombre </th><th> Vida </th><th> Extinto </th></tr>
-    </thead>
-    <tbody>
-    <tr th:each="a : ${animales}">
-        <td th:text="${a.nombre}"></td>
-        <td th:text="${a.vidaMedia}"></td>
-        <td th:text="${a.extinto ? 'Sí' : 'No'}"></td>
-        <a th:href="@{/animales/detalles/{id}(id=${a.id})}">Detalles</a>
-    </tr>
-    </tbody>
-</table>
+    <h1>Detalles del animal</h1>
+    <div th:if="${animal} != null">
+        <p> Nombre: <span th:text="${animal.nombre}"></span></p>
+        <p> Vida Media: <span th:text="${animal.vidaMedia}"></span></p>
+        <p> Extinto: <span th:text="${animal.extinto ? 'Sí' : 'No'}"></span></p>
+    </div>
 </body>
+</html>

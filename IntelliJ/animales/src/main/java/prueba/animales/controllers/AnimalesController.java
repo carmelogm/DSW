@@ -2,9 +2,7 @@ package prueba.animales.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import prueba.animales.models.Animales;
 import prueba.animales.services.AnimalesService;
 
@@ -19,12 +17,23 @@ public class AnimalesController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("animales", service.findAll());
-        return "/index";
+        return "/animales/index";
     }
-    @GetMapping("/animales/{id}")
+    @GetMapping("/{id}")
     public String getAnimalesId(@PathVariable int id, Model model){
         Animales animal = service.findById(id);
         model.addAttribute("animal", animal);
-        return "/detalles";
+        return "/animales/detalles";
+    }
+
+    @GetMapping("/crear")
+    public String crearAnimal(Model model){
+        model.addAttribute("animal", new Animales());
+        return "animales/crear";
+    }
+
+    @PostMapping("/crear")
+    public String crearAnimal(@ModelAttribute("animal") Animales animales){
+        return "redirect:/";
     }
 }
