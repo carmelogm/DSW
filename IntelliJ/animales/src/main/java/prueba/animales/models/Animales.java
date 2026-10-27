@@ -10,6 +10,8 @@ public class Animales {
 
     private boolean extinto;
 
+    public Animales(){}
+
     public Animales(Integer id, String nombre, int vidaMedia, boolean extinto) {
         this.id = id;
         this.nombre = nombre;

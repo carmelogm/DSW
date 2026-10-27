@@ -1,7 +1,9 @@
 package prueba.animales.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import prueba.animales.models.Animales;
 import prueba.animales.services.AnimalesService;
@@ -33,7 +35,29 @@ public class AnimalesController {
     }
 
     @PostMapping("/crear")
-    public String crearAnimal(@ModelAttribute("animal") Animales animales){
-        return "redirect:/";
+    public String crearAnimal(@Valid @ModelAttribute("animal") Animales animales, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            return "animales/crear";
+        } else {
+            service.guardar(animales);
+            return "redirect:/animales";
+        }
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editarAnimal(@PathVariable int id, Model model){
+        Animales animales = service.findById(id);
+        model.addAttribute("animal", animales);
+        return "animales/editar";
+    }
+
+    @PostMapping("/editar/{id}")
+    public String editarAnimal(@PathVariable int id, @Valid @ModelAttribute("animal") Animales animales, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "animales/editar";
+        }
+        service.actualizar(id, animales);
+        return "redirect:/animales";
     }
 }

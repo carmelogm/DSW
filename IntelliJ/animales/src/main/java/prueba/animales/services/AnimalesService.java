@@ -25,4 +25,17 @@ import java.util.List;
         }
         return null;
     }
+
+    public void actualizar(int id, Animales animalActualizado) {
+        for (int i = 0; i < animales.size(); i++) {
+            if (animales.get(i).getId() == id) {
+                animales.set(i, animalActualizado);
+                break;
+            }
+        }
+    }
+
+    public void guardar(Animales animal) {
+        this.animales.add(animal);
+    }
     }

@@ -13,5 +13,8 @@
         <p> Vida Media: <span th:text="${animal.vidaMedia}"></span></p>
         <p> Extinto: <span th:text="${animal.extinto ? 'Sí' : 'No'}"></span></p>
     </div>
+    <div>
+        <a class="btn btn-dark btn-sm" th:href="@{/animales}">Volver al listado</a>
+    </div>
 </body>
 </html>
