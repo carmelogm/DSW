@@ -2,45 +2,40 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Animal</title>
+    <title>Editar Animal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>Editar Animal</h1>
+<div class="container mt-4">
+    <h1>Editar Animal</h1>
 
-<form action="#" th:action="@{/animales/editar}" th:object="${animal}" method="post">
+    <form action="#" th:action="@{/animales/editar/{id}(id=${animal.id})}" th:object="${animal}" method="post">
 
-    <div>
-        <label for="id">ID:</label>
-        <input type="number" id="id" th:field="*{id}" placeholder="ID del animal" />
-    </div>
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="vida" class="form-label">Vida Media (años):</label>
+            <input type="number" id="vida" th:field="*{vidaMedia}" class="form-control" required />
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" id="extinto" th:field="*{extinto}" class="form-check-input" />
+            <label for="extinto" class="form-check-label">¿Está extinto?</label>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-dark">Guardar Cambios</button>
+        </div>
+    </form>
+
     <br>
-
-    <div>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" th:field="*{nombre}" required />
-    </div>
-    <br>
-
-    <div>
-        <label for="vida">Vida Media (años):</label>
-        <input type="number" id="vida" th:field="*{vidaMedia}" required />
-    </div>
-    <br>
-
-    <div>
-        <label for="extinto">¿Está extinto?:</label>
-        <input type="checkbox" id="extinto" th:field="*{extinto}" />
-    </div>
-    <br>
-
-    <div>
-        <input type="submit" value="Editar">
-    </div>
-</form>
-
-<br>
-<a class="btn btn-dark btn-sm" th:href="@{/animales}">Volver al listado</a>
+    <a class="btn btn-dark btn-sm" th:href="@{/animales}">Volver al listado</a>
+</div>
 </body>
 </html>

@@ -60,4 +60,10 @@ public class AnimalesController {
         service.actualizar(id, animales);
         return "redirect:/animales";
     }
+
+    @PostMapping("/eliminar/{id}")
+    public String eliminarAnimal(@PathVariable int id) {
+        service.eliminarPorId(id);
+        return "redirect:/animales";
+    }
 }

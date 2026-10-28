@@ -9,15 +9,21 @@
 <body>
 <table class="table table-bordered">
     <thead>
-        <tr><th> Nombre </th><th> Vida </th><th> Extinto </th></tr>
+        <tr><th> ID </th><th> Nombre </th><th> Vida </th><th> Extinto </th></tr>
     </thead>
     <tbody>
     <tr th:each="a : ${animales}">
+        <td th:text="${a.id}"></td>
         <td th:text="${a.nombre}"></td>
         <td th:text="${a.vidaMedia}"></td>
         <td th:text="${a.extinto ? 'Sí' : 'No'}"></td>
         <td><a class="btn btn-dark btn-sm" th:href="@{/animales/{id}(id=${a.id})}">Detalles</a></td>
         <td><a class="btn btn-dark btn-sm" th:href="@{/animales/editar/{id}(id=${a.id})}">Editar</a></td>
+        <td>
+            <form th:action="@{/animales/eliminar/{id}(id=${a.id})}" method="post" style="display:inline;" onsubmit="return confirm('¿Seguro que quieres eliminar a este animal?');">
+                <button type="submit" class="btn btn-dark btn-sm">Eliminar</button>
+            </form>
+        </td>
     </tr>
     <tr>
         <td><a class="btn btn-dark btn-sm" th:href="@{/animales/crear}">Crear Nuevo Animal</a></td>

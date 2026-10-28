@@ -35,7 +35,12 @@ import java.util.List;
         }
     }
 
+    public void eliminarPorId(int id) {
+        animales.removeIf(a -> a.getId() == id);
+    }
+
     public void guardar(Animales animal) {
+        animal.setId(this.animales.size() + 1);
         this.animales.add(animal);
     }
     }
