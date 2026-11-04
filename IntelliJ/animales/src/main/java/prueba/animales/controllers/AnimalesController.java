@@ -9,51 +9,52 @@ import prueba.animales.models.Animales;
 import prueba.animales.services.AnimalesService;
 
 @Controller
-
 @RequestMapping("/animales")
 public class AnimalesController {
+
     private final AnimalesService service;
+
     public AnimalesController(AnimalesService service) {
         this.service = service;
     }
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("animales", service.findAll());
-        return "/animales/index";
+        return "animales/index";
     }
+
     @GetMapping("/{id}")
-    public String getAnimalesId(@PathVariable int id, Model model){
-        Animales animal = service.findById(id);
+    public String getAnimalesId(@PathVariable Integer id, Model model) {
+        Animales animal = service.findById(id).orElse(null);
         model.addAttribute("animal", animal);
-        return "/animales/detalles";
+        return "detalles";
     }
 
     @GetMapping("/crear")
-    public String crearAnimal(Model model){
+    public String crearAnimal(Model model) {
         model.addAttribute("animal", new Animales());
         return "animales/crear";
     }
 
     @PostMapping("/crear")
-    public String crearAnimal(@Valid @ModelAttribute("animal") Animales animales, BindingResult bindingResult){
-
-        if(bindingResult.hasErrors()){
+    public String crearAnimal(@Valid @ModelAttribute("animal") Animales animales, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "animales/crear";
-        } else {
-            service.guardar(animales);
-            return "redirect:/animales";
         }
+        service.guardar(animales);
+        return "redirect:/animales";
     }
 
     @GetMapping("/editar/{id}")
-    public String editarAnimal(@PathVariable int id, Model model){
-        Animales animales = service.findById(id);
+    public String editarAnimal(@PathVariable Integer id, Model model) {
+        Animales animales = service.findById(id).orElse(null);
         model.addAttribute("animal", animales);
         return "animales/editar";
     }
 
     @PostMapping("/editar/{id}")
-    public String editarAnimal(@PathVariable int id, @Valid @ModelAttribute("animal") Animales animales, BindingResult bindingResult){
+    public String editarAnimal(@PathVariable Integer id, @Valid @ModelAttribute("animal") Animales animales, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "animales/editar";
         }
@@ -61,8 +62,8 @@ public class AnimalesController {
         return "redirect:/animales";
     }
 
-    @PostMapping("/eliminar/{id}")
-    public String eliminarAnimal(@PathVariable int id) {
+    @GetMapping("/eliminar/{id}")
+    public String eliminarAnimal(@PathVariable Integer id) {
         service.eliminarPorId(id);
         return "redirect:/animales";
     }
