@@ -62,7 +62,7 @@ public class AnimalesController {
         return "redirect:/animales";
     }
 
-    @GetMapping("/eliminar/{id}")
+    @PostMapping("/eliminar/{id}")
     public String eliminarAnimal(@PathVariable Integer id) {
         service.eliminarPorId(id);
         return "redirect:/animales";
