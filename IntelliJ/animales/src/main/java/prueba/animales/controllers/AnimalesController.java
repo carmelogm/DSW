@@ -1,3 +1,4 @@
+
 package prueba.animales.controllers;
 
 import jakarta.validation.Valid;
@@ -21,49 +22,54 @@ public class AnimalesController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("animales", service.findAll());
-        return "animales/index";
+        return "index";
     }
 
     @GetMapping("/{id}")
-    public String getAnimalesId(@PathVariable Integer id, Model model) {
+    public String detalles(@PathVariable Integer id, Model model) {
         Animales animal = service.findById(id).orElse(null);
         model.addAttribute("animal", animal);
         return "detalles";
     }
 
     @GetMapping("/crear")
-    public String crearAnimal(Model model) {
+    public String crear(Model model) {
         model.addAttribute("animal", new Animales());
-        return "animales/crear";
+        return "crear";
     }
 
     @PostMapping("/crear")
-    public String crearAnimal(@Valid @ModelAttribute("animal") Animales animales, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "animales/crear";
+    public String guardar(@Valid @ModelAttribute("animal") Animales animal,
+                          BindingResult result) {
+        if (result.hasErrors()) {
+            return "crear";
         }
-        service.guardar(animales);
+
+        service.guardar(animal);
         return "redirect:/animales";
     }
 
     @GetMapping("/editar/{id}")
-    public String editarAnimal(@PathVariable Integer id, Model model) {
-        Animales animales = service.findById(id).orElse(null);
-        model.addAttribute("animal", animales);
-        return "animales/editar";
+    public String editar(@PathVariable Integer id, Model model) {
+        Animales animal = service.findById(id).orElse(null);
+        model.addAttribute("animal", animal);
+        return "editar";
     }
 
     @PostMapping("/editar/{id}")
-    public String editarAnimal(@PathVariable Integer id, @Valid @ModelAttribute("animal") Animales animales, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "animales/editar";
+    public String actualizar(@PathVariable Integer id,
+                             @Valid @ModelAttribute("animal") Animales animal,
+                             BindingResult result) {
+        if (result.hasErrors()) {
+            return "editar";
         }
-        service.actualizar(id, animales);
+
+        service.actualizar(id, animal);
         return "redirect:/animales";
     }
 
     @PostMapping("/eliminar/{id}")
-    public String eliminarAnimal(@PathVariable Integer id) {
+    public String eliminar(@PathVariable Integer id) {
         service.eliminarPorId(id);
         return "redirect:/animales";
     }
